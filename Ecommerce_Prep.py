@@ -19,12 +19,12 @@ dates = ["order_purchase_timestamp", "order_approved_at","order_delivered_carrie
 orders[dates] = pd.to_datetime(orders[dates].stack()).unstack()
 
 
-orders["On Time"] = orders["order_estimated_delivery_date"] > orders["order_delivered_customer_date"]
-orders["Estimated Time to Deliver"] = orders["order_estimated_delivery_date"]  - orders["order_purchase_timestamp"] 
-orders["Estimated Days to Deliver"] = (orders["order_estimated_delivery_date"]  - orders["order_purchase_timestamp"] ).dt.days
+orders["on_time"] = orders["order_estimated_delivery_date"] > orders["order_delivered_customer_date"]
+orders["estimated_time_to_deliver"] = orders["order_estimated_delivery_date"]  - orders["order_purchase_timestamp"] 
+orders["estimated_days_to_deliver"] = (orders["order_estimated_delivery_date"]  - orders["order_purchase_timestamp"] ).dt.days
 
-orders["Estimated Days to Deliver"].plot.hist(bins=50)
+orders["estimated_days_to_deliver"].plot.hist(bins=50)
 
-order
+orders["delivery_time_category"] = pd.qcut(orders["estimated_days_to_deliver"], 5, labels=["Very Short", "Short", "Normal", "Long","Very Long"])
 
-orders.head()
+orders.to_csv("orders_dataset_new.csv")
