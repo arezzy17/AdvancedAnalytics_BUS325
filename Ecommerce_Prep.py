@@ -27,4 +27,4 @@ orders["estimated_days_to_deliver"].plot.hist(bins=50)
 
 orders["delivery_time_category"] = pd.qcut(orders["estimated_days_to_deliver"], 5, labels=["Very Short", "Short", "Normal", "Long","Very Long"])
 
-orders.to_csv("orders_dataset_new.csv")
+orders.to_csv("orders_dataset_new.csv",index=False)
