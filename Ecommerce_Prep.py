@@ -23,8 +23,6 @@ orders["on_time"] = orders["order_estimated_delivery_date"] > orders["order_deli
 orders["estimated_time_to_deliver"] = orders["order_estimated_delivery_date"]  - orders["order_purchase_timestamp"] 
 orders["estimated_days_to_deliver"] = (orders["order_estimated_delivery_date"]  - orders["order_purchase_timestamp"] ).dt.days
 
-orders["estimated_days_to_deliver"].plot.hist(bins=50)
-
 orders["delivery_time_category"] = pd.qcut(orders["estimated_days_to_deliver"], 5, labels=["Very Short", "Short", "Normal", "Long","Very Long"])
 
-orders.to_csv("orders_dataset_new.csv",index=False)
+orders.to_csv("orders_dataset_new.csv")
